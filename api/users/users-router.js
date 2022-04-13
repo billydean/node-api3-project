@@ -21,9 +21,16 @@ router.get('/', (req, res) => {
     .catch(err => {console.error(err)})
 });
 
-router.get('/:id', (req, res) => {
+router.get('/:id', validateUserId, (req, res) =>  {
   // RETURN THE USER OBJECT
   // this needs a middleware to verify user id
+  User.getById(req.params.id)
+    .then(user=>{
+      res.json(user);
+    })
+    .catch(err=>{
+      console.error(err);
+    })
 });
 
 router.post('/', (req, res) => {
