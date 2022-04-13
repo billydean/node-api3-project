@@ -10,13 +10,15 @@ const {
   validateUserId
 } = require('../middleware/middleware')
 
-
-
-
 const router = express.Router();
 
 router.get('/', (req, res) => {
   // RETURN AN ARRAY WITH ALL THE USERS
+  User.get()
+    .then(users => {
+      res.json(users);
+    })
+    .catch(err => {console.error(err)})
 });
 
 router.get('/:id', (req, res) => {
